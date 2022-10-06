@@ -16,11 +16,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickButton() {
-        val btnButton: Button = findViewById(R.id.btnButton)
-        val txtName: TextView = findViewById(R.id.txtName)
-        btnButton.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 }
