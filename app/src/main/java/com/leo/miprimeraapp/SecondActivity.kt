@@ -51,6 +51,8 @@ class SecondActivity : AppCompatActivity() {
             .crop()
             .compress(1024)
             .maxResultSize(1080, 1080)
-            .createIntent { startImageForResult.launch(intent) }
+            .createIntent { intent ->
+                startImageForResult.launch(intent)
+            }
     }
 }
