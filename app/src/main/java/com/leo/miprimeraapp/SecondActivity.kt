@@ -1,6 +1,7 @@
 package com.leo.miprimeraapp
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.leo.miprimeraapp.databinding.ActivitySecondBinding
+import com.leo.miprimeraapp.utils.SharedPref
 import java.io.File
 
 class SecondActivity : AppCompatActivity() {
@@ -22,6 +24,10 @@ class SecondActivity : AppCompatActivity() {
 
         binding.circleImageUser.setOnClickListener {
             selectImage()
+        }
+
+        binding.btnCloseSession.setOnClickListener {
+            logout()
         }
     }
 
@@ -54,5 +60,12 @@ class SecondActivity : AppCompatActivity() {
             .createIntent { intent ->
                 startImageForResult.launch(intent)
             }
+    }
+
+    private fun logout() {
+        val sharedPref = SharedPref(this)
+        sharedPref.remove("user")
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
     }
 }

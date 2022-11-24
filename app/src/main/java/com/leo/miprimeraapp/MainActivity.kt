@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputLayout
 import com.leo.miprimeraapp.databinding.ActivityMainBinding
+import com.leo.miprimeraapp.utils.SharedPref
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getUserFromSession()
+
         binding.btnLogin.setOnClickListener {
             login()
         }
@@ -27,10 +30,38 @@ class MainActivity : AppCompatActivity() {
         val username = binding.txtUsername.editText?.text.toString()
         val password = binding.txtPassword.editText?.text.toString()
 
+        if (username == "admin" && password == "12345") {
+            saveUserInSession(username)
+        } else {
+            Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_LONG).show()
+        }
+        //Toast.makeText(this, "$username, $password", Toast.LENGTH_LONG).show()
+
+    }
+
+    private fun saveUserInSession(user: String) {
+        val sharedPref = SharedPref(this)
+        sharedPref.save("user", user)
+
+        if (!sharedPref.getData("user").isNullOrBlank()) {
+            goToSecondActivity()
+        } else {
+            Toast.makeText(this, "No hay data", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun goToSecondActivity() {
         val i = Intent(this, SecondActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(i)
-        //Toast.makeText(this, "$username, $password", Toast.LENGTH_LONG).show()
+    }
 
+    private fun getUserFromSession() {
+        val sharedPref = SharedPref(this)
+        if (!sharedPref.getData("user").isNullOrBlank()) {
+            goToSecondActivity()
+        } else {
+            Toast.makeText(this, "Session Caducada", Toast.LENGTH_LONG).show()
+        }
     }
 }

@@ -12,17 +12,24 @@ class SharedPref (activity: Activity) {
         prefs = activity.getSharedPreferences("com.leo.miprimeraapp", Context.MODE_PRIVATE)
     }
 
-    fun save(key: String, obj: Any) {
+    fun save(key: String, value: String) { // "user": {"user": "admin", "email": "lperez"}
         try {
-            val gson = null
-            // todo add gson
-            // todo add json
             with(prefs?.edit()) {
-                this?.putString(key, gson)
+                this?.putString(key, value)
                 this?.commit()
             }
         } catch (e: Exception) {
             Log.d("Error", "Err ${e.message}")
         }
+    }
+
+    // Todo: Obtener la session
+    fun getData(key: String): String? {
+        return prefs?.getString(key, "") // "user"
+    }
+
+    //Todo: Remover la session
+    fun remove(key: String) {
+        prefs?.edit()?.remove(key)?.apply()
     }
 }
