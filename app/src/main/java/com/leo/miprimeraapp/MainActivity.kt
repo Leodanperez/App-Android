@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToSecondActivity() {
-        val i = Intent(this, SecondActivity::class.java)
+        val i = Intent(this, GaleryActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(i)
     }
