@@ -31,6 +31,22 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="14sp"/>
+
+        <ImageButton
+            android:id="@+id/search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_search" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imagesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:layout_below="@id/search_layout"/>
 
 </RelativeLayout>
